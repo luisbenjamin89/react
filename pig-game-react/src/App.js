@@ -5,10 +5,10 @@ import { useEffect } from 'react'
 import { useRef } from 'react'
 
 function App() {
-  const [activePlayer, setActivePlayer] = useState(1)
-  const [score, setScore] = useState([3, 6])
-  const [current, setCurrent] = useState(7)
-  const [diceNumber, setDiceNumber] = useState(5)
+  const [activePlayer, setActivePlayer] = useState(0)
+  const [score, setScore] = useState([0, 0])
+  const [current, setCurrent] = useState(0)
+  const [diceNumber, setDiceNumber] = useState(0)
 
   const handleHold = () => {
     const newScore = [...score]
@@ -39,13 +39,13 @@ function App() {
   return (
     <main>
       <Player
-        name="Player1"
+        name="Player 1"
         score={score[0]}
         current={activePlayer === 1 && current} //el operador y (&&) devuelve el ultimo valor de la condicion por ejemplo current
         isActive={activePlayer === 1}
       />
       <Player
-        name="Player2"
+        name="Player 2"
         score={score[1]}
         current={activePlayer === 2 && current}
         isActive={activePlayer === 2}

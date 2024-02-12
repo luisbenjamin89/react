@@ -3,16 +3,17 @@ import './Player.css'
 //pros={name:'player1',score:43,current:0,isActive:true}
 function Player({ name, score, current, isActive }) {
   //const {name,score,current,isActive}=props
-  let classPlayer
-  if (isActive) {
-    if (score >= 100) {
-      classPlayer = 'player player--winner'
-    } else {
-      classPlayer = 'player player--active'
-    }
-  } else {
-    classPlayer = 'player'
-  }
+  
+ 
+   const classPlayer=
+   score > 10
+   ?'player player--winner'
+   :isActive
+   ?'player player--active'
+   :'player'
+
+
+  console.log(`Renderizondo el componente Player para ${name}  con la clase ${classPlayer}y un score${score}`)
   return (
     <section className={classPlayer}>
       <h2 className="name">{name}</h2>
