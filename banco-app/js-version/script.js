@@ -77,4 +77,20 @@ const createUsername = function (accounts) {
 }
 
 createUsername(accounts)
-console.log(accounts)
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault()
+
+  const username = inputLoginUsername.value
+  const pin = inputLoginPin.value
+const account = accounts.find((account) => account.username === username)
+if (account?.pin === Number(pin)) { //si el usuario existe en la base de datos nos da el pin si no lo devuelve error o login incorecto 
+  console.log('Login correcto')
+}else {
+  console.log('Login incorrecto')
+}
+})
+//tareas
+//mostrar texto de bienvenida
+//cmabiar opacidad
+//quitar los movientes que hay en el html 
