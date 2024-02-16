@@ -79,17 +79,49 @@ const createUsername = function (accounts) {
 createUsername(accounts)
 
 btnLogin.addEventListener('click', function (e) {
+  //1.no llamar al aservidor 
   e.preventDefault()
-
-  const username = inputLoginUsername.value
+  //2.buscar cuenta del usuario  y ver si existe 
+const username = inputLoginUsername.value
   const pin = inputLoginPin.value
 const account = accounts.find((account) => account.username === username)
+//3.recibir un objeto cuenta {pin : 111}
+//4.recibir undefined si no exite la cuenta
 if (account?.pin === Number(pin)) { //si el usuario existe en la base de datos nos da el pin si no lo devuelve error o login incorecto 
   console.log('Login correcto')
+  //5.si existe, mostrar la app y el mensaje de bienvenida
+  containerApp.style.opacity = 100
+  labelWelcome.textContent = `Bienvenido, ${account.owner.split(' ')[0]}`
+  updateUI(account)
 }else {
   console.log('Login incorrecto')
+  //6.si no existe,usuario o contraseña incorrectos
 }
+//4.limpiar los inputs
+inputLoginUsername.value=inputLoginPin.value=''
+inputLoginPin.blur() //quita el focus
 })
+
+function updateUI(account) {
+displayMovements(account.movements)
+
+}
+
+function displayMovements(movements) {
+  containerMovements.innerHTML = ''
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal'
+    const html = `
+      <div class="movements__row">
+        <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+        <div class="movements__value">${mov}€</div>
+      </div>
+    `
+    containerMovements.insertAdjacentHTML('afterbegin', html)
+  })
+}
 //tareas
 //mostrar texto de bienvenida
 //cmabiar opacidad
