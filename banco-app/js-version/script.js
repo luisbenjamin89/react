@@ -102,9 +102,10 @@ inputLoginUsername.value=inputLoginPin.value=''
 inputLoginPin.blur() //quita el focus
 })
 
-function updateUI(account) {
-displayMovements(account.movements)
-
+function updateUI({movements}) {
+  displayMovements(movements)
+  displayBalance(movements)
+  displaySummary (movements)
 }
 
 function displayMovements(movements) {
@@ -122,6 +123,32 @@ function displayMovements(movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html)
   })
 }
+
+ const displayBalance =function (movements) {
+ const balance =movements.reduce(
+  (acc,mov) => {
+    return (acc+mov)
+  },0)
+  labelBalance.textContent=`${balance.toFixed(2)}`
+  
+ }
+
+ const displaySummary = function(movements)
+ {
+const sumIn = movements
+.filter((mov)=>mov >0)
+.reduce((acc,mov)=>acc+mov,0)
+labelSumIn.textContent = `${sumIn.toFixed(2)}`
+
+  const sumOut = movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, mov) => acc + mov, 0)
+  labelSumOut.textContent = `${Math.abs(sumOut).toFixed(2)}`
+}
+
+
+
+
 //tareas
 //mostrar texto de bienvenida
 //cmabiar opacidad
