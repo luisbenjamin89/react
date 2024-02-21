@@ -8,14 +8,25 @@ import Movements from './Movements/Movements'
 import accounts from './cuentas'
 
 function App() {
-  const [account, setAccount] = useState(accounts[0])
+  const [account, setAccount] = useState({})
   const { movements = [], owner: user = '' } = account
+
+const handleLogin = (user, pin) => {
+  //
+  const currentAccount = accounts.find(
+    (account) => account.username === user && account.pin === pin
+  )
+  //
+  if (currentAccount) {
+    setAccount(currentAccount)
+  }
+}
 
   return (
     <>
       <nav>
         <Welcome user={user} />
-        <Login />
+        <Login onLogin={handleLogin} />
       </nav>
       {user && (
         <main className="app">
